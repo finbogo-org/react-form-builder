@@ -1,5 +1,5 @@
 {
-  "name": "react-form-builder2",
+  "name": "@finbogouk/react-form-builder2",
   "version": "0.18.0",
   "description": "A complete form builder for react.",
   "main": "lib/index.js",
@@ -110,5 +110,13 @@
     "serve:api": "node server/index.js",
     "pretranspile": "rimraf lib",
     "transpile": "babel --out-dir lib src --copy-files"
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "bugs": {
+    "url": "https://github.com/kiho/react-form-builder/issues"
+  },
+  "homepage": "https://github.com/kiho/react-form-builder#readme"
 }
