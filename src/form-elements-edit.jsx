@@ -7,18 +7,12 @@ import {
   convertToRaw,
 } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-// import { Editor } from 'react-draft-wysiwyg';
+import { Editor } from "react-draft-wysiwyg";
 
 import DynamicOptionList from "./dynamic-option-list";
 import { get } from "./stores/requests";
 import ID from "./UUID";
 import IntlMessages from "./language-provider/IntlMessages";
-
-const Editor = dynamic(
-  () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
-  { ssr: false }
-);
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const toolbar = {
   options: ["inline", "list", "textAlign", "fontSize", "link", "history"],
@@ -199,6 +193,7 @@ export default class FormElementsEdit extends React.Component {
     if (typeof window === undefined) {
       return null;
     }
+
     return (
       <div>
         <div className="clearfix">
