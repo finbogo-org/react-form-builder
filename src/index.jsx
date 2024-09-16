@@ -53,8 +53,12 @@ class ReactFormBuilder extends React.Component {
     if (this.props.toolbarItems) {
       toolbarProps.items = this.props.toolbarItems;
     }
+    let windowFallBack = {};
+    if (typeof window !== "undefined") {
+      windowFallBack = window;
+    }
     return (
-      <DndProvider backend={HTML5Backend} context={window}>
+      <DndProvider backend={HTML5Backend} context={windowFallBack}>
         <IntlProvider
           locale={currentAppLocale.locale}
           messages={currentAppLocale.messages}
