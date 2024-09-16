@@ -7,7 +7,9 @@ import {
   convertToRaw,
 } from "draft-js";
 import draftToHtml from "draftjs-to-html";
-import { Editor } from "react-draft-wysiwyg";
+const Editor = lazy(() =>
+  import("react-draft-wysiwyg").then((mod) => ({ default: mod.Editor }))
+);
 
 import DynamicOptionList from "./dynamic-option-list";
 import { get } from "./stores/requests";
