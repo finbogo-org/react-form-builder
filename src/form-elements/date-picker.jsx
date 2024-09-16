@@ -110,7 +110,7 @@ class DatePicker extends React.Component {
     props.name = this.props.data.field_name;
     const readOnly = this.props.data.readOnly || this.props.read_only;
     const iOS =
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !window?.MSStream;
     const placeholderText = this.state.formatMask.toLowerCase();
 
     if (this.props.mutable) {
