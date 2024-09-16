@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import * as PkgTextAreaAutosize from "react-textarea-autosize";
 import * as DraftJs from "draft-js";
 import * as draftToHtml from "draftjs-to-html";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import TextAreaAutosize from "react-textarea-autosize";
 import {
   ContentState,
