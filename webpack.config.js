@@ -17,7 +17,7 @@ module.exports = {
   plugins: [
     //
   ],
-  
+
   module: {
     rules: [
       {
@@ -45,6 +45,15 @@ module.exports = {
           }
         ]
       },
+      // Add the following rule for Tailwind CSS support
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader' // This will process your CSS with PostCSS (required for Tailwind)
+        ],
+      },
     ]
   },
   devServer: {
@@ -52,9 +61,9 @@ module.exports = {
     host: "localhost",
     historyApiFallback: true,
     headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-        "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
     },
     watchOptions: {aggregateTimeout: 300, poll: 1000},
     contentBase: './public',
