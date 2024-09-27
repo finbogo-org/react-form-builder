@@ -1,7 +1,4 @@
-const AccordionItem = ({
-                         title,
-                         children
-                       }) => {
+const AccordionItem = () => {
   return null; // This component doesn't render anything directly
 };
 
