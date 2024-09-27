@@ -28,12 +28,11 @@ import {
   Star,
   Tags,
 } from 'lucide-react';
+import Accordion from './components/accordion/Accordion'; // Adjust the path if necessary
+import AccordionItem from './components/accordion/AccordionItem';
 import ToolbarItem from './toolbar-draggable-item';
-import ToolbarGroupItem from './toolbar-group-item';
-
 import ID from './UUID';
 import store from './stores/store';
-import { groupBy } from './functions';
 
 // function isDefaultItem(item) {
 //   const keys = Object.keys(item);
@@ -58,19 +57,6 @@ function buildItems(items, defaultItems) {
     }
     return found || x;
   });
-}
-
-function buildGroupItems(allItems) {
-  const items = allItems.filter(x => !x.group_name);
-  const gItems = allItems.filter(x => !!x.group_name);
-  const grouped = groupBy(gItems, x => x.group_name);
-  const groupKeys = gItems.map(x => x.group_name)
-    .filter((v, i, self) => self.indexOf(v) === i);
-  return {
-    items,
-    grouped,
-    groupKeys
-  };
 }
 
 class Toolbar extends React.Component {
@@ -168,7 +154,8 @@ class Toolbar extends React.Component {
   }
 
   _defaultItems(intl) {
-    return [
+    // Text elements category
+    const textItems = [
       {
         key: 'Header',
         name: intl.formatMessage({ id: 'Header' }),
@@ -197,6 +184,18 @@ class Toolbar extends React.Component {
         icon: <MoveHorizontal/>,
       },
       {
+        key: 'HyperLink',
+        name: intl.formatMessage({ id: 'Website' }),
+        icon: <Link/>,
+        static: true,
+        content: intl.formatMessage({ id: 'place-holder-website-link' }),
+        href: 'http://www.example.com',
+      },
+    ];
+
+    // Input elements category
+    const inputItems = [
+      {
         key: 'Dropdown',
         canHaveAnswer: true,
         name: intl.formatMessage({ id: 'Dropdown' }),
@@ -204,6 +203,36 @@ class Toolbar extends React.Component {
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'dropdown_',
         options: [],
+      },
+      {
+        key: 'DatePicker',
+        canDefaultToday: true,
+        canReadOnly: true,
+        dateFormat: 'MM/dd/yyyy',
+        timeFormat: 'hh:mm aa',
+        showTimeSelect: false,
+        showTimeSelectOnly: false,
+        showTimeInput: false,
+        name: intl.formatMessage({ id: 'Date' }),
+        icon: <CalendarDays/>,
+        label: intl.formatMessage({ id: 'place-holder-label' }),
+        field_name: 'date_picker_',
+      },
+      {
+        key: 'Signature',
+        canReadOnly: true,
+        name: intl.formatMessage({ id: 'Signature' }),
+        icon: <SquarePen/>,
+        label: intl.formatMessage({ id: 'signature' }),
+        field_name: 'signature_',
+      },
+      {
+        key: 'Rating',
+        canHaveAnswer: true,
+        name: intl.formatMessage({ id: 'Rating' }),
+        label: intl.formatMessage({ id: 'place-holder-label' }),
+        icon: <Star/>,
+        field_name: 'rating_',
       },
       {
         key: 'Tags',
@@ -273,6 +302,23 @@ class Toolbar extends React.Component {
         field_name: 'text_area_',
       },
       {
+        key: 'Range',
+        name: intl.formatMessage({ id: 'Range' }),
+        icon: <SlidersHorizontal/>,
+        label: intl.formatMessage({ id: 'place-holder-label' }),
+        field_name: 'range_',
+        step: 1,
+        default_value: 3,
+        min_value: 1,
+        max_value: 5,
+        min_label: intl.formatMessage({ id: 'easy' }),
+        max_label: intl.formatMessage({ id: 'difficult' }),
+      },
+    ];
+
+    // Layout elements category
+    const layoutItems = [
+      {
         key: 'FieldSet',
         canHaveAnswer: false,
         name: intl.formatMessage({ id: 'fieldset' }),
@@ -329,6 +375,10 @@ class Toolbar extends React.Component {
         col_count: 6,
         class_name: 'col-md-2',
       },
+    ];
+
+    // Media elements category
+    const mediaItems = [
       {
         key: 'Image',
         name: intl.formatMessage({ id: 'Image' }),
@@ -336,67 +386,6 @@ class Toolbar extends React.Component {
         icon: <Image/>,
         field_name: 'image_',
         src: '',
-      },
-      {
-        key: 'Rating',
-        canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Rating' }),
-        label: intl.formatMessage({ id: 'place-holder-label' }),
-        icon: <Star/>,
-        field_name: 'rating_',
-      },
-      {
-        key: 'DatePicker',
-        canDefaultToday: true,
-        canReadOnly: true,
-        dateFormat: 'MM/dd/yyyy',
-        timeFormat: 'hh:mm aa',
-        showTimeSelect: false,
-        showTimeSelectOnly: false,
-        showTimeInput: false,
-        name: intl.formatMessage({ id: 'Date' }),
-        icon: <CalendarDays/>,
-        label: intl.formatMessage({ id: 'place-holder-label' }),
-        field_name: 'date_picker_',
-      },
-      {
-        key: 'Signature',
-        canReadOnly: true,
-        name: intl.formatMessage({ id: 'Signature' }),
-        icon: <SquarePen/>,
-        label: intl.formatMessage({ id: 'signature' }),
-        field_name: 'signature_',
-      },
-      {
-        key: 'HyperLink',
-        name: intl.formatMessage({ id: 'Website' }),
-        icon: <Link/>,
-        static: true,
-        content: intl.formatMessage({ id: 'place-holder-website-link' }),
-        href: 'http://www.example.com',
-      },
-      {
-        key: 'Download',
-        name: intl.formatMessage({ id: 'File Attachment' }),
-        icon: <File/>,
-        static: true,
-        content: intl.formatMessage({ id: 'place-holder-file-name' }),
-        field_name: 'download_',
-        file_path: '',
-        _href: '',
-      },
-      {
-        key: 'Range',
-        name: intl.formatMessage({ id: 'Range' }),
-        icon: <SlidersHorizontal/>,
-        label: intl.formatMessage({ id: 'place-holder-label' }),
-        field_name: 'range_',
-        step: 1,
-        default_value: 3,
-        min_value: 1,
-        max_value: 5,
-        min_label: intl.formatMessage({ id: 'easy' }),
-        max_label: intl.formatMessage({ id: 'difficult' }),
       },
       {
         key: 'Camera',
@@ -411,6 +400,34 @@ class Toolbar extends React.Component {
         icon: <File/>,
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'file_upload_',
+      },
+      {
+        key: 'Download',
+        name: intl.formatMessage({ id: 'File Attachment' }),
+        icon: <File/>,
+        static: true,
+        content: intl.formatMessage({ id: 'place-holder-file-name' }),
+        field_name: 'download_',
+        file_path: '',
+        _href: '',
+      },
+    ];
+    return [
+      {
+        group_name: 'Text',
+        items: textItems,
+      },
+      {
+        group_name: 'Input',
+        items: inputItems,
+      },
+      {
+        group_name: 'Layout',
+        items: layoutItems,
+      },
+      {
+        group_name: 'Media',
+        items: mediaItems,
       },
     ];
   }
@@ -552,26 +569,22 @@ class Toolbar extends React.Component {
                                        onCreate={this.create}/>);
 
   render() {
-    const {
-      items,
-      grouped,
-      groupKeys
-    } = buildGroupItems(this.state.items);
+    const categories = this._defaultItems(this.props.intl);
+
     return (
-      <div className="float-right border-2 w-[407px] p-2">
+      <div className="border-2 w-[400px] p-2">
         <h4>{this.props.intl.formatMessage({ id: 'toolbox' })}</h4>
-        <ul
-          className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
-          {items.map(this.renderItem)}
-          {groupKeys.map(k => (
-            <ToolbarGroupItem
-              key={k}
-              name={k}
-              group={grouped.get(k)}
-              renderItem={this.renderItem}
-            />
+        <Accordion>
+          {categories.map(category => (
+            <AccordionItem key={category.group_name}
+                           title={category.group_name}>
+              <ul
+                className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
+                {category.items.map(this.renderItem)}
+              </ul>
+            </AccordionItem>
           ))}
-        </ul>
+        </Accordion>
       </div>
     );
   }
