@@ -6,7 +6,7 @@ import FormBuilder, { Registry } from './src/index';
 import * as variables from './variables';
 
 // Add our stylesheets for the demo.
-require('./scss/application.scss');
+// require('./scss/application.scss');
 
 const url = '/api/formdata';
 const saveUrl = '/api/formdata';
@@ -43,7 +43,7 @@ const TestComponent = () => <h2>Hello</h2>;
 //     key: 'FieldSet',
 //     label:"Field Set",
 //     name:"Field Set",
-    
+
 //   },
 //   {
 //     group_name: 'Multi Column Row',
@@ -62,7 +62,7 @@ const TestComponent = () => <h2>Hello</h2>;
 //     group_name: 'Multi Column Row',
 //     key: 'FiveColumnRow',
 //     element: 'MultiColumnRow',
-//   },  
+//   },
 //   {
 //     group_name: 'Multi Column Row',
 //     key: 'SixColumnRow',
@@ -106,7 +106,7 @@ const App = () => (
     locale='en'
     saveAlways={false}
     // toolbarItems={items}
-  
+
   />);
 
 ReactDOM.render(
