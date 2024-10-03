@@ -1,9 +1,10 @@
 /**
-  * <Preview />
-  */
+ * <Preview />
+ */
 
 import React from 'react';
 import update from 'immutability-helper';
+import { Plus } from 'lucide-react';
 import store from './stores/store';
 import FormElementsEdit from './form-dynamic-edit';
 import SortableFormElements from './sortable-form-elements';
@@ -15,12 +16,16 @@ export default class Preview extends React.Component {
   state = {
     data: [],
     answer_data: {},
+    placeholderVisible: true,
   };
 
   constructor(props) {
     super(props);
 
-    const { onLoad, onPost } = props;
+    const {
+      onLoad,
+      onPost
+    } = props;
     store.setExternalHandler(onLoad, onPost);
 
     this.editForm = React.createRef();
@@ -40,9 +45,19 @@ export default class Preview extends React.Component {
   }
 
   componentDidMount() {
-    const { data, url, saveUrl, saveAlways } = this.props;
+    const {
+      data,
+      url,
+      saveUrl,
+      saveAlways
+    } = this.props;
     store.subscribe(state => this._onUpdate(state.data));
-    store.dispatch('load', { loadUrl: url, saveUrl, data: data || [], saveAlways });
+    store.dispatch('load', {
+      loadUrl: url,
+      saveUrl,
+      data: data || [],
+      saveAlways
+    });
     document.addEventListener('mousedown', this.editModeOff);
   }
 
@@ -54,7 +69,7 @@ export default class Preview extends React.Component {
     if (this.editForm.current && !this.editForm.current.contains(e.target)) {
       this.manualEditModeOff();
     }
-  }
+  };
 
   manualEditModeOff = () => {
     const { editElement } = this.props;
@@ -63,10 +78,11 @@ export default class Preview extends React.Component {
       this.updateElement(editElement);
     }
     this.props.manualEditModeOff();
-  }
+  };
 
   _setValue(text) {
-    return text.replace(/[^A-Z0-9]+/ig, '_').toLowerCase();
+    return text.replace(/[^A-Z0-9]+/ig, '_')
+      .toLowerCase();
   }
 
   updateElement(element) {
@@ -131,9 +147,11 @@ export default class Preview extends React.Component {
     const oldItem = this.getDataById(oldId);
     const oldCol = child.col;
     // eslint-disable-next-line no-param-reassign
-    item.childItems[oldCol] = oldId; oldItem.col = oldCol;
+    item.childItems[oldCol] = oldId;
+    oldItem.col = oldCol;
     // eslint-disable-next-line no-param-reassign
-    item.childItems[col] = child.id; child.col = col;
+    item.childItems[col] = child.id;
+    child.col = col;
     store.dispatch('updateOrder', data);
     return true;
   }
@@ -142,13 +160,15 @@ export default class Preview extends React.Component {
     const { data } = this.state;
     if (this.swapChildren(data, item, child, col)) {
       return;
-    } if (isBusy) {
+    }
+    if (isBusy) {
       return;
     }
     const oldParent = this.getDataById(child.parentId);
     const oldCol = child.col;
     // eslint-disable-next-line no-param-reassign
-    item.childItems[col] = child.id; child.col = col;
+    item.childItems[col] = child.id;
+    child.col = col;
     // eslint-disable-next-line no-param-reassign
     child.parentId = item.id;
     // eslint-disable-next-line no-param-reassign
@@ -212,6 +232,9 @@ export default class Preview extends React.Component {
       this.restoreCard(item, id);
     } else {
       data.splice(hoverIndex, 0, item);
+
+      this.setState({ placeholderVisible: false });
+
       this.saveData(item, hoverIndex, hoverIndex);
       store.dispatch('insertItem', item);
     }
@@ -250,7 +273,18 @@ export default class Preview extends React.Component {
     if (SortableFormElement === null) {
       return null;
     }
-    return <SortableFormElement id={item.id} seq={this.seq} index={index} moveCard={this.moveCard} insertCard={this.insertCard} mutable={false} parent={this.props.parent} editModeOn={this.props.editModeOn} isDraggable={true} key={item.id} sortData={item.id} data={item} getDataById={this.getDataById} setAsChild={this.setAsChild} removeChild={this.removeChild} _onDestroy={this._onDestroy} />;
+    return <SortableFormElement id={item.id} seq={this.seq} index={index}
+                                moveCard={this.moveCard}
+                                insertCard={this.insertCard} mutable={false}
+                                parent={this.props.parent}
+                                editModeOn={this.props.editModeOn}
+                                isDraggable={true} key={item.id}
+                                sortData={item.id} data={item}
+                                getDataById={this.getDataById}
+                                setAsChild={this.setAsChild}
+                                removeChild={this.removeChild}
+                                _onDestroy={this._onDestroy}
+    />;
   }
 
   showEditForm() {
@@ -271,7 +305,9 @@ export default class Preview extends React.Component {
 
   render() {
     let classes = this.props.className;
-    if (this.props.editMode) { classes += ' is-editing'; }
+    if (this.props.editMode) {
+      classes += ' is-editing';
+    }
     const data = this.state.data.filter(x => !!x && !x.parentId);
     const items = data.map((item, index) => this.getElement(item, index));
     return (
@@ -280,17 +316,33 @@ export default class Preview extends React.Component {
           {this.props.editElement !== null && this.showEditForm()}
         </div>
         <div className="Sortable">{items}</div>
-        <PlaceHolder id="form-place-holder" show={items.length === 0} index={items.length} moveCard={this.cardPlaceHolder} insertCard={this.insertCard} />
+        <PlaceHolder id="form-place-holder" show={items.length === 0}
+                     index={items.length} moveCard={this.cardPlaceHolder}
+                     insertCard={this.insertCard}/>
         <CustomDragLayer/>
+        {items.length > 0 && (
+          <div
+            className="flex flex-col bg-white border-gray-300 items-center justify-center h-1/8 w-full rounded-xl">
+            <div className="inline-flex items-center justify-center">
+              <div
+                className="flex items-center justify-center m-2 mr-2 rounded-full bg-gray-800">
+                <Plus
+                  size={20}
+                  color={'white'}/> {/* Plus icon in white, add right margin */}
+              </div>
+              <div>Add Field</div>
+            </div>
+          </div>)}
       </div>
     );
   }
 }
+
 Preview.defaultProps = {
   showCorrectColumn: false,
   files: [],
   editMode: false,
   editElement: null,
-  className: 'col-md-9 react-form-builder-preview float-left',
+  className: 'rounded-t-xl bg-[#F6F6F6] p-4 shadow-sm min-h-[30rem] w-full h-full',
   renderEditForm: props => <FormElementsEdit {...props} />,
 };

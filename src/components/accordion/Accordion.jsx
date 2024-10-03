@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-const Accordion = ({ children }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+const Accordion = ({
+                     children,
+                     activeIndex
+                   }) => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  // Use useEffect to sync openIndex with activeIndex when it changes
+  useEffect(() => {
+    setOpenIndex(activeIndex);
+  }, [activeIndex]);
 
   const handleClick = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
@@ -18,12 +26,13 @@ const Accordion = ({ children }) => {
           >
             {child.props.title}
             <ChevronDown
-              className={`h-4 w-4 transition-transform duration-300 ${activeIndex === index ? 'rotate-180' : ''}`}/>
+              className={`h-4 w-4 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}/>
           </button>
           <div
-            className={`${
-              activeIndex === index ? 'block' : 'hidden'
-            } overflow-hidden transition-all duration-300 p-4`} // Add padding to content
+            className={`
+              overflow-scroll transition-all duration-300
+              ${openIndex === index ? 'max-h-96 py-1 overflow-scroll' : 'max-h-0'}
+            `}
           >
             {child.props.children}
           </div>

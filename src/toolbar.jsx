@@ -21,6 +21,7 @@ import {
   Phone,
   Pilcrow,
   Plus,
+  Search,
   SlidersHorizontal,
   SquareCheck,
   SquareChevronDown,
@@ -33,6 +34,7 @@ import AccordionItem from './components/accordion/AccordionItem';
 import ToolbarItem from './toolbar-draggable-item';
 import ID from './UUID';
 import store from './stores/store';
+import Switch from './components/switch';
 
 // function isDefaultItem(item) {
 //   const keys = Object.keys(item);
@@ -66,12 +68,47 @@ class Toolbar extends React.Component {
     const items = buildItems(props.items, this._defaultItems(intl));
     this.state = {
       items,
+      activeCategory: 'elements',
+      searchQuery: '',
+      showLayout: false, // New state to track the switch
+      activeAccordionIndex: 0,
     };
     this.create = this.create.bind(this);
+    this.handleSwitchChange = this.handleSwitchChange.bind(this);
   }
 
   componentDidMount() {
     store.subscribe(state => this.setState({ store: state }));
+  }
+
+  handleSwitchChange = () => {
+    this.setState(prevState => ({
+      showLayout: !prevState.showLayout,
+      activeAccordionIndex: null, // Reset activeAccordionIndex when switching tabs
+    }));
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchQuery !== this.state.searchQuery || prevState.showLayout !== this.state.showLayout) {
+      this.updateActiveAccordionIndex();
+    }
+  }
+
+  updateActiveAccordionIndex() {
+    const {
+      showLayout,
+      searchQuery,
+    } = this.state;
+    const categories = this._defaultItems(this.props.intl);
+
+    const firstMatchingCategoryIndex = categories
+      .filter(category => (showLayout ? category.group_name === 'Layout' : category.group_name !== 'Layout'))
+      .findIndex(category => category.items.some(item => item.name.toLowerCase()
+        .includes(searchQuery.toLowerCase())));
+
+    this.setState({
+      activeAccordionIndex: firstMatchingCategoryIndex !== -1 ? firstMatchingCategoryIndex : 0,
+    });
   }
 
   static _defaultItemOptions(element, intl) {
@@ -81,17 +118,17 @@ class Toolbar extends React.Component {
           {
             value: 'place_holder_option_1',
             text: intl.formatMessage({ id: 'place-holder-option-1' }),
-            key: `dropdown_option_${ID.uuid()}`
+            key: `dropdown_option_${ID.uuid()}`,
           },
           {
             value: 'place_holder_option_2',
             text: intl.formatMessage({ id: 'place-holder-option-2' }),
-            key: `dropdown_option_${ID.uuid()}`
+            key: `dropdown_option_${ID.uuid()}`,
           },
           {
             value: 'place_holder_option_3',
             text: intl.formatMessage({ id: 'place-holder-option-3' }),
-            key: `dropdown_option_${ID.uuid()}`
+            key: `dropdown_option_${ID.uuid()}`,
           },
         ];
       case 'Tags':
@@ -99,17 +136,17 @@ class Toolbar extends React.Component {
           {
             value: 'place_holder_tag_1',
             text: intl.formatMessage({ id: 'place-holder-tag-1' }),
-            key: `tags_option_${ID.uuid()}`
+            key: `tags_option_${ID.uuid()}`,
           },
           {
             value: 'place_holder_tag_2',
             text: intl.formatMessage({ id: 'place-holder-tag-2' }),
-            key: `tags_option_${ID.uuid()}`
+            key: `tags_option_${ID.uuid()}`,
           },
           {
             value: 'place_holder_tag_3',
             text: intl.formatMessage({ id: 'place-holder-tag-3' }),
-            key: `tags_option_${ID.uuid()}`
+            key: `tags_option_${ID.uuid()}`,
           },
         ];
       case 'Checkboxes':
@@ -117,17 +154,17 @@ class Toolbar extends React.Component {
           {
             value: 'place_holder_option_1',
             text: intl.formatMessage({ id: 'place-holder-option-1' }),
-            key: `checkboxes_option_${ID.uuid()}`
+            key: `checkboxes_option_${ID.uuid()}`,
           },
           {
             value: 'place_holder_option_2',
             text: intl.formatMessage({ id: 'place-holder-option-2' }),
-            key: `checkboxes_option_${ID.uuid()}`
+            key: `checkboxes_option_${ID.uuid()}`,
           },
           {
             value: 'place_holder_option_3',
             text: intl.formatMessage({ id: 'place-holder-option-3' }),
-            key: `checkboxes_option_${ID.uuid()}`
+            key: `checkboxes_option_${ID.uuid()}`,
           },
         ];
       case 'RadioButtons':
@@ -135,17 +172,17 @@ class Toolbar extends React.Component {
           {
             value: 'place_holder_option_1',
             text: intl.formatMessage({ id: 'place-holder-option-1' }),
-            key: `radiobuttons_option_${ID.uuid()}`
+            key: `radiobuttons_option_${ID.uuid()}`,
           },
           {
             value: 'place_holder_option_2',
             text: intl.formatMessage({ id: 'place-holder-option-2' }),
-            key: `radiobuttons_option_${ID.uuid()}`
+            key: `radiobuttons_option_${ID.uuid()}`,
           },
           {
             value: 'place_holder_option_3',
             text: intl.formatMessage({ id: 'place-holder-option-3' }),
-            key: `radiobuttons_option_${ID.uuid()}`
+            key: `radiobuttons_option_${ID.uuid()}`,
           },
         ];
       default:
@@ -434,7 +471,7 @@ class Toolbar extends React.Component {
 
   addCustomOptions(item, elementOptions) {
     if (item.type === 'custom') {
-      const customOptions = Object.assign({}, item, elementOptions);
+      const customOptions = { ...item, ...elementOptions };
       customOptions.custom = true;
       customOptions.component = item.component || null;
       customOptions.custom_options = item.custom_options || [];
@@ -549,7 +586,7 @@ class Toolbar extends React.Component {
       if (item.options.length > 0) {
         elementOptions.options = item.options.map(x => ({
           ...x,
-          key: `custom_option_${ID.uuid()}`
+          key: `custom_option_${ID.uuid()}`,
         }));
       } else {
         elementOptions.options = Toolbar._defaultItemOptions(elementOptions.element, intl);
@@ -569,23 +606,86 @@ class Toolbar extends React.Component {
                                        onCreate={this.create}/>);
 
   render() {
+    const {
+      searchQuery,
+    } = this.state;
     const categories = this._defaultItems(this.props.intl);
 
+    // Filter items based on search within each category
+    const filteredCategories = categories.map(category => ({
+      ...category,
+      items: category.items.filter(item => item.name.toLowerCase()
+        .includes(searchQuery.toLowerCase())),
+    }));
+
+    // Filter categories based on showLayout AFTER filtering items
+    const displayedCategories = filteredCategories.filter(category => (this.state.showLayout ? category.group_name === 'Layout' : category.group_name !== 'Layout'));
+
     return (
-      <div className="border-2 w-[400px] p-2">
-        <h4>{this.props.intl.formatMessage({ id: 'toolbox' })}</h4>
-        <Accordion>
-          {categories.map(category => (
+
+      <div
+        className="border-2 border-transparent shadow-md rounded-2xl w-[400px] p-2">
+        <div className="mb-2 mt-2">
+          <Switch isChecked={this.state.showLayout}
+                  onChange={this.handleSwitchChange}/>
+        </div>
+        {/* Search bar container */}
+        <div className="relative mb-4"> {/* Add margin-bottom for spacing */}
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => this.setState({ searchQuery: e.target.value })}
+            className="pl-10 pr-10 py-1 rounded-full bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+          />
+          <div
+            className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <Search size={15}/>
+          </div>
+          {searchQuery
+            && ( // Conditionally render the clear button
+              <button
+                onClick={() => this.setState({ searchQuery: '' })}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+              >
+                <svg
+                  className="h-5 w-5 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
+        </div>
+        <Accordion
+          activeIndex={this.state.activeAccordionIndex}
+          onChange={(index) => this.setState({ activeAccordionIndex: index })}
+        >
+          {displayedCategories.map((category) => (
             <AccordionItem key={category.group_name}
                            title={category.group_name}>
               <ul
                 className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
-                {category.items.map(this.renderItem)}
+                {category.items.map((item) => ( // Map over individual items
+                  <li key={item.key}
+                      className="transition-transform duration-200 hover:scale-[1.03]">
+                    {this.renderItem(item)}
+                  </li>
+                ))}
               </ul>
             </AccordionItem>
           ))}
         </Accordion>
       </div>
+
     );
   }
 }

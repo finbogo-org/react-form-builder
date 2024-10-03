@@ -5,10 +5,11 @@ import { DragSource, DropTarget } from 'react-dnd';
 import ItemTypes from './ItemTypes';
 
 const style = {
-  border: '1px dashed gray',
+  border: '1px lightgray solid',
+  borderRadius: '1rem',
   padding: '0.5rem 1rem',
   marginBottom: '.5rem',
-  backgroundColor: 'white',
+  backgroundColor: 'transparent',
   cursor: 'pointer',
 };
 
@@ -73,7 +74,8 @@ const cardTarget = {
     }
 
     // Determine rectangle on screen
-    const hoverBoundingRect = findDOMNode(component).getBoundingClientRect();
+    const hoverBoundingRect = findDOMNode(component)
+      .getBoundingClientRect();
 
     // Get vertical middle
     const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
@@ -125,7 +127,7 @@ export default function (ComposedComponent) {
       // text: PropTypes.string.isRequired,
       moveCard: PropTypes.func.isRequired,
       seq: PropTypes.number,
-    }
+    };
 
     static defaultProps = {
       seq: -1,
@@ -141,7 +143,10 @@ export default function (ComposedComponent) {
       const opacity = isDragging ? 0 : 1;
 
       return connectDragPreview(
-        connectDropTarget(<div><ComposedComponent {...this.props} style={{ ...style, opacity }}></ComposedComponent></div>),
+        connectDropTarget(<div><ComposedComponent {...this.props} style={{
+          ...style,
+          opacity,
+        }}></ComposedComponent></div>),
       );
     }
   }
