@@ -195,34 +195,34 @@ class Toolbar extends React.Component {
     const textItems = [
       {
         key: 'Header',
-        name: intl.formatMessage({ id: 'Header' }),
+        name: intl.formatMessage({ id: 'header-text' }),
         icon: <Heading/>,
         static: true,
         content: intl.formatMessage({ id: 'place-holder-text' }),
       },
       {
         key: 'Label',
-        name: intl.formatMessage({ id: 'Label' }),
+        name: intl.formatMessage({ id: 'label' }),
         static: true,
         icon: <CaseSensitive/>,
         content: intl.formatMessage({ id: 'place-holder-text' }),
       },
       {
         key: 'Paragraph',
-        name: intl.formatMessage({ id: 'Paragraph' }),
+        name: intl.formatMessage({ id: 'paragraph' }),
         static: true,
         icon: <Pilcrow/>,
         content: intl.formatMessage({ id: 'place-holder-text' }),
       },
       {
         key: 'LineBreak',
-        name: intl.formatMessage({ id: 'Line Break' }),
+        name: intl.formatMessage({ id: 'line-break' }),
         static: true,
         icon: <MoveHorizontal/>,
       },
       {
         key: 'HyperLink',
-        name: intl.formatMessage({ id: 'Website' }),
+        name: intl.formatMessage({ id: 'website' }),
         icon: <Link/>,
         static: true,
         content: intl.formatMessage({ id: 'place-holder-website-link' }),
@@ -235,7 +235,7 @@ class Toolbar extends React.Component {
       {
         key: 'Dropdown',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Dropdown' }),
+        name: intl.formatMessage({ id: 'dropdown' }),
         icon: <SquareChevronDown/>,
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'dropdown_',
@@ -250,7 +250,7 @@ class Toolbar extends React.Component {
         showTimeSelect: false,
         showTimeSelectOnly: false,
         showTimeInput: false,
-        name: intl.formatMessage({ id: 'Date' }),
+        name: intl.formatMessage({ id: 'date' }),
         icon: <CalendarDays/>,
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'date_picker_',
@@ -258,7 +258,7 @@ class Toolbar extends React.Component {
       {
         key: 'Signature',
         canReadOnly: true,
-        name: intl.formatMessage({ id: 'Signature' }),
+        name: intl.formatMessage({ id: 'signature' }),
         icon: <SquarePen/>,
         label: intl.formatMessage({ id: 'signature' }),
         field_name: 'signature_',
@@ -266,7 +266,7 @@ class Toolbar extends React.Component {
       {
         key: 'Rating',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Rating' }),
+        name: intl.formatMessage({ id: 'rating' }),
         label: intl.formatMessage({ id: 'place-holder-label' }),
         icon: <Star/>,
         field_name: 'rating_',
@@ -274,7 +274,7 @@ class Toolbar extends React.Component {
       {
         key: 'Tags',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Tags' }),
+        name: intl.formatMessage({ id: 'tags' }),
         icon: <Tags/>,
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'tags_',
@@ -283,7 +283,7 @@ class Toolbar extends React.Component {
       {
         key: 'Checkboxes',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Checkboxes' }),
+        name: intl.formatMessage({ id: 'checkboxes' }),
         icon: <SquareCheck/>,
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'checkboxes_',
@@ -292,7 +292,7 @@ class Toolbar extends React.Component {
       {
         key: 'RadioButtons',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Multiple Choice' }),
+        name: intl.formatMessage({ id: 'multiple-choice' }),
         icon: <CircleDot/>,
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'radiobuttons_',
@@ -301,7 +301,7 @@ class Toolbar extends React.Component {
       {
         key: 'TextInput',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Text' }),
+        name: intl.formatMessage({ id: 'text-input' }),
         label: intl.formatMessage({ id: 'place-holder-label' }),
         icon: <CaseSensitive/>,
         field_name: 'text_input_',
@@ -309,7 +309,7 @@ class Toolbar extends React.Component {
       {
         key: 'EmailInput',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Email' }),
+        name: intl.formatMessage({ id: 'email-input' }),
         label: intl.formatMessage({ id: 'place-holder-email' }),
         icon: <Mail/>,
         field_name: 'email_input_',
@@ -317,7 +317,7 @@ class Toolbar extends React.Component {
       {
         key: 'NumberInput',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Number Input' }),
+        name: intl.formatMessage({ id: 'number-input' }),
         label: intl.formatMessage({ id: 'place-holder-label' }),
         icon: <Plus/>,
         field_name: 'number_input_',
@@ -325,7 +325,7 @@ class Toolbar extends React.Component {
       {
         key: 'PhoneNumber',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Phone' }),
+        name: intl.formatMessage({ id: 'phone-input' }),
         label: intl.formatMessage({ id: 'place-holder-phone-number' }),
         icon: <Phone/>,
         field_name: 'phone_input_',
@@ -333,14 +333,14 @@ class Toolbar extends React.Component {
       {
         key: 'TextArea',
         canHaveAnswer: true,
-        name: intl.formatMessage({ id: 'Multi Line Input' }),
+        name: intl.formatMessage({ id: 'multi-line-input' }),
         label: intl.formatMessage({ id: 'place-holder-label' }),
         icon: <AArrowUp/>,
         field_name: 'text_area_',
       },
       {
         key: 'Range',
-        name: intl.formatMessage({ id: 'Range' }),
+        name: intl.formatMessage({ id: 'range' }),
         icon: <SlidersHorizontal/>,
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'range_',
@@ -366,7 +366,7 @@ class Toolbar extends React.Component {
       {
         key: 'TwoColumnRow',
         canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'Two Columns' }),
+        name: intl.formatMessage({ id: 'two-columns-row' }),
         label: '',
         icon: <Columns2/>,
         field_name: 'two_col_row_',
@@ -374,7 +374,7 @@ class Toolbar extends React.Component {
       {
         key: 'ThreeColumnRow',
         canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'Three Columns' }),
+        name: intl.formatMessage({ id: 'three-columns-row' }),
         label: '',
         icon: <Columns2/>,
         field_name: 'three_col_row_',
@@ -383,7 +383,7 @@ class Toolbar extends React.Component {
         key: 'FourColumnRow',
         element: 'MultiColumnRow',
         canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'Four Columns' }),
+        name: intl.formatMessage({ id: 'four-columns-row' }),
         label: '',
         icon: <Columns2/>,
         field_name: 'four_col_row_',
@@ -394,7 +394,7 @@ class Toolbar extends React.Component {
         key: 'FiveColumnRow',
         element: 'MultiColumnRow',
         canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'Five Columns' }),
+        name: intl.formatMessage({ id: 'five-columns-row' }),
         label: '',
         icon: <Columns2/>,
         field_name: 'five_col_row_',
@@ -405,7 +405,7 @@ class Toolbar extends React.Component {
         key: 'SixColumnRow',
         element: 'MultiColumnRow',
         canHaveAnswer: false,
-        name: intl.formatMessage({ id: 'Six Columns' }),
+        name: intl.formatMessage({ id: 'six-columns-row' }),
         label: '',
         icon: <Columns2/>,
         field_name: 'six_col_row_',
@@ -418,7 +418,7 @@ class Toolbar extends React.Component {
     const mediaItems = [
       {
         key: 'Image',
-        name: intl.formatMessage({ id: 'Image' }),
+        name: intl.formatMessage({ id: 'image' }),
         label: '',
         icon: <Image/>,
         field_name: 'image_',
@@ -426,21 +426,21 @@ class Toolbar extends React.Component {
       },
       {
         key: 'Camera',
-        name: intl.formatMessage({ id: 'Camera' }),
+        name: intl.formatMessage({ id: 'camera' }),
         icon: <Camera/>,
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'camera_',
       },
       {
         key: 'FileUpload',
-        name: intl.formatMessage({ id: 'File Upload' }),
+        name: intl.formatMessage({ id: 'file-upload' }),
         icon: <File/>,
         label: intl.formatMessage({ id: 'place-holder-label' }),
         field_name: 'file_upload_',
       },
       {
         key: 'Download',
-        name: intl.formatMessage({ id: 'File Attachment' }),
+        name: intl.formatMessage({ id: 'file-attachment' }),
         icon: <File/>,
         static: true,
         content: intl.formatMessage({ id: 'place-holder-file-name' }),
@@ -674,12 +674,7 @@ class Toolbar extends React.Component {
                            title={category.group_name}>
               <ul
                 className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
-                {category.items.map((item) => ( // Map over individual items
-                  <li key={item.key}
-                      className="transition-transform duration-200 hover:scale-[1.03]">
-                    {this.renderItem(item)}
-                  </li>
-                ))}
+                {category.items.map(this.renderItem)}
               </ul>
             </AccordionItem>
           ))}
