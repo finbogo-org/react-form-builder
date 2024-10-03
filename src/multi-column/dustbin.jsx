@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, Fragment } from 'react';
+import React, { useImperativeHandle } from 'react';
 import { DropTarget } from 'react-dnd';
 import FormElements from '../form-elements';
 import ItemTypes from '../ItemTypes';
@@ -30,18 +30,18 @@ function getElement(item, props) {
     return getCustomElement(item, props);
   }
   const Element = FormElements[item.element || item.key];
-  return <Element {...props} key={`form_${item.id}`} data={item} />;
+  return <Element {...props} key={`form_${item.id}`} data={item}/>;
 }
 
-function getStyle(backgroundColor) {
+function getStyle() {
   return {
-    border: '1px solid rgba(0,0,0,0.2)',
     minHeight: '2rem',
     minWidth: '7rem',
     width: '100%',
-    backgroundColor,
-    padding: 0,
+    backgroundColor: 'white',
+    padding: 2,
     float: 'left',
+    borderRadius: '1rem',
   };
 }
 
@@ -62,16 +62,28 @@ function isContainer(item) {
 
 const Dustbin = React.forwardRef(
   ({
-    onDropSuccess, seq, draggedItem, parentIndex, canDrop, isOver, isOverCurrent, connectDropTarget, items, col, getDataById, ...rest
-  }, ref) => {
+     onDropSuccess,
+     seq,
+     draggedItem,
+     parentIndex,
+     canDrop,
+     isOver,
+     isOverCurrent,
+     connectDropTarget,
+     items,
+     col,
+     getDataById,
+     ...rest
+   }, ref) => {
     const item = getDataById(items[col]);
     useImperativeHandle(
       ref,
       () => ({
         onDrop: (dropped) => {
-          console.log("dropped ites")
+          console.log('dropped ites');
           const { data } = dropped;
           if (data) {
+            // eslint-disable-next-line no-unused-expressions
             onDropSuccess && onDropSuccess();
             store.dispatch('deleteLastItem');
           }
@@ -87,6 +99,7 @@ const Dustbin = React.forwardRef(
     // console.log('HoverIndex:',parentIndex)
     // console.log('SameCard:',sameCard)
 
+    // eslint-disable-next-line no-unused-vars
     let backgroundColor = 'rgba(0, 0, 0, .03)';
 
     if (!sameCard && isOver && canDrop && !draggedItem.data.isContainer) {
@@ -95,8 +108,10 @@ const Dustbin = React.forwardRef(
 
     // console.log('sameCard, canDrop', sameCard, canDrop);
     return connectDropTarget(
-      <div style={!sameCard ? getStyle(backgroundColor) : getStyle('rgba(0, 0, 0, .03') }>
-      {!element && <span>Drop your element here </span>}
+      <div
+        style={!sameCard ? getStyle() : getStyle()}>
+        {!element &&
+          <span className="flex justify-center items-center">Drop your element here </span>}
         {element}
       </div>,
     );
@@ -111,7 +126,6 @@ export default DropTarget(
       monitor,
       component,
     ) {
-
       if (!component) {
         return;
       }
@@ -133,7 +147,7 @@ export default DropTarget(
 
       if (!isContainer(item)) {
         (component).onDrop(item);
-        console.log("calling on Drop from 137",item)
+        console.log('calling on Drop from 137', item);
         if (item.data && typeof props.setAsChild === 'function') {
           const isNew = !item.data.id;
           const data = isNew ? item.onCreate(item.data) : item.data;

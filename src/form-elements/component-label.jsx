@@ -8,9 +8,10 @@ const ComponentLabel = (props) => {
     return null;
   }
   return (
-    <label className={props.className || 'form-label'}>
+    <label className={props.className || ''}>
       <span dangerouslySetInnerHTML={{ __html: labelText }}/>
-      {hasRequiredLabel && <span className="label-required badge badge-danger">Required</span>}
+      {hasRequiredLabel &&
+        <span className="label-required badge badge-danger">Required</span>}
     </label>
   );
 };

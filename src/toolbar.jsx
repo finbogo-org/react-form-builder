@@ -665,15 +665,21 @@ class Toolbar extends React.Component {
               </button>
             )}
         </div>
-
-        <Accordion activeIndex={this.state.activeAccordionIndex}
-                   onChange={(index) => this.setState({ activeAccordionIndex: index })}>
+        <Accordion
+          activeIndex={this.state.activeAccordionIndex}
+          onChange={(index) => this.setState({ activeAccordionIndex: index })}
+        >
           {displayedCategories.map((category) => (
             <AccordionItem key={category.group_name}
                            title={category.group_name}>
               <ul
                 className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-4">
-                {category.items.map(this.renderItem)}
+                {category.items.map((item) => ( // Map over individual items
+                  <li key={item.key}
+                      className="transition-transform duration-200 hover:scale-[1.03]">
+                    {this.renderItem(item)}
+                  </li>
+                ))}
               </ul>
             </AccordionItem>
           ))}

@@ -1,9 +1,14 @@
-import React from "react";
+import React from 'react';
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import ComponentHeader from './component-header';
+import ComponentLabel from './component-label';
 // import { format, parse, parseISO } from "date-fns";
-const { format, parse, parseISO } = require("date-fns");
-import ReactDatePicker from "react-datepicker";
-import ComponentHeader from "./component-header";
-import ComponentLabel from "./component-label";
+const {
+  format,
+  parse,
+  parseISO
+} = require('date-fns');
 
 class DatePicker extends React.Component {
   constructor(props) {
@@ -21,12 +26,12 @@ class DatePicker extends React.Component {
     const { formatMask } = this.state;
     if (dt && dt.target) {
       placeholder =
-        dt && dt.target && dt.target.value === ""
+        dt && dt.target && dt.target.value === ''
           ? formatMask.toLowerCase()
-          : "";
+          : '';
       const formattedDate = dt.target.value
         ? format(parseISO(dt.target.value), formatMask)
-        : "";
+        : '';
       this.setState({
         value: formattedDate,
         internalValue: formattedDate,
@@ -34,7 +39,7 @@ class DatePicker extends React.Component {
       });
     } else {
       this.setState({
-        value: dt ? format(dt, formatMask) : "",
+        value: dt ? format(dt, formatMask) : '',
         internalValue: dt,
         placeholder,
       });
@@ -42,15 +47,22 @@ class DatePicker extends React.Component {
   };
 
   static updateFormat(props, oldFormatMask) {
-    const { showTimeSelect, showTimeSelectOnly, showTimeInput } = props.data;
+    const {
+      showTimeSelect,
+      showTimeSelectOnly,
+      showTimeInput
+    } = props.data;
     const dateFormat =
-      showTimeSelect && showTimeSelectOnly ? "" : props.data.dateFormat;
+      showTimeSelect && showTimeSelectOnly ? '' : props.data.dateFormat;
     const timeFormat =
-      showTimeSelect || showTimeInput ? props.data.timeFormat : "";
+      showTimeSelect || showTimeInput ? props.data.timeFormat : '';
     const formatMask = `${dateFormat} ${timeFormat}`.trim();
     const updated = formatMask !== oldFormatMask;
 
-    return { updated, formatMask };
+    return {
+      updated,
+      formatMask
+    };
   }
 
   static updateDateTime(props, state, formatMask) {
@@ -59,14 +71,14 @@ class DatePicker extends React.Component {
     const { defaultToday } = props.data;
     if (
       defaultToday &&
-      (props.defaultValue === "" || props.defaultValue === undefined)
+      (props.defaultValue === '' || props.defaultValue === undefined)
     ) {
       value = format(new Date(), formatMask);
       internalValue = new Date();
     } else {
       value = props.defaultValue;
 
-      if (value === "" || value === undefined) {
+      if (value === '' || value === undefined) {
         internalValue = undefined;
       } else {
         internalValue = parse(value, state.formatMask, new Date());
@@ -90,7 +102,10 @@ class DatePicker extends React.Component {
   // }
 
   static getDerivedStateFromProps(props, state) {
-    const { updated, formatMask } = DatePicker.updateFormat(
+    const {
+      updated,
+      formatMask
+    } = DatePicker.updateFormat(
       props,
       state.formatMask
     );
@@ -102,11 +117,15 @@ class DatePicker extends React.Component {
   }
 
   render() {
-    const { showTimeSelect, showTimeSelectOnly, showTimeInput } =
+    const {
+      showTimeSelect,
+      showTimeSelectOnly,
+      showTimeInput
+    } =
       this.props.data;
     const props = {};
-    props.type = "date";
-    props.className = "form-control";
+    props.type = 'date';
+    props.className = 'form-control';
     props.name = this.props.data.field_name;
     const readOnly = this.props.data.readOnly || this.props.read_only;
     const iOS =
@@ -118,9 +137,9 @@ class DatePicker extends React.Component {
       props.ref = this.inputField;
     }
 
-    let baseClasses = "SortableItem rfb-item";
+    let baseClasses = 'SortableItem rfb-item';
     if (this.props.data.pageBreakBefore) {
-      baseClasses += " alwaysbreak";
+      baseClasses += ' alwaysbreak';
     }
 
     return (
@@ -137,7 +156,7 @@ class DatePicker extends React.Component {
                 readOnly={readOnly}
                 placeholder={this.state.placeholder}
                 value={this.state.value}
-                className="form-control"
+                className="flex bg-red-500"
               />
             )}
             {iOS && !readOnly && (
@@ -157,8 +176,8 @@ class DatePicker extends React.Component {
                 ref={props.ref}
                 onChange={this.handleChange}
                 selected={this.state.internalValue}
-                todayButton={"Today"}
-                className="form-control"
+                todayButton={'Today'}
+                className="bg-white p-2 rounded-xl w-full"
                 isClearable={true}
                 showTimeSelect={showTimeSelect}
                 showTimeSelectOnly={showTimeSelectOnly}
