@@ -2,9 +2,8 @@
  * <Preview />
  */
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import update from 'immutability-helper';
-import { Plus } from 'lucide-react';
 import store from './stores/store';
 import FormElementsEdit from './form-dynamic-edit';
 import SortableFormElements from './sortable-form-elements';
@@ -312,27 +311,22 @@ export default class Preview extends React.Component {
     const items = data.map((item, index) => this.getElement(item, index));
     return (
       <div className={classes}>
-        <div className="edit-form" ref={this.editForm}>
-          {this.props.editElement !== null && this.showEditForm()}
+        <div
+          className={`edit-form fixed top-0 left-0 h-full w-1/3 bg-white shadow-lg z-50 transform transition-transform duration-300 overflow-scroll ${
+            this.props.editElement !== null ? 'translate-x-0' : '-translate-x-full'
+          }`}
+          ref={this.editForm}
+        >
+          <Suspense fallback={<div>Loading...</div>}>
+            {this.props.editElement !== null && this.showEditForm()}
+          </Suspense>
         </div>
         <div className="Sortable">{items}</div>
         <PlaceHolder id="form-place-holder" show={items.length === 0}
                      index={items.length} moveCard={this.cardPlaceHolder}
                      insertCard={this.insertCard}/>
         <CustomDragLayer/>
-        {items.length > 0 && (
-          <div
-            className="flex flex-col bg-white border-gray-300 items-center justify-center h-1/8 w-full rounded-xl">
-            <div className="inline-flex items-center justify-center">
-              <div
-                className="flex items-center justify-center m-2 mr-2 rounded-full bg-gray-800">
-                <Plus
-                  size={20}
-                  color={'white'}/> {/* Plus icon in white, add right margin */}
-              </div>
-              <div>Add Field</div>
-            </div>
-          </div>)}
+
       </div>
     );
   }

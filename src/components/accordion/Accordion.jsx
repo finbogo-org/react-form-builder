@@ -7,7 +7,7 @@ const Accordion = ({
                    }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
-  // Use useEffect to sync openIndex with activeIndex when it changes
+  // Sync openIndex with activeIndex when it changes
   useEffect(() => {
     setOpenIndex(activeIndex);
   }, [activeIndex]);
@@ -17,7 +17,7 @@ const Accordion = ({
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full h-auto">
       {children.map((child, index) => (
         <div key={index} className="">
           <button
@@ -26,16 +26,16 @@ const Accordion = ({
           >
             {child.props.title}
             <ChevronDown
-              className={`h-4 w-4 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}/>
+              className={`h-4 w-4 transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}
+            />
           </button>
-          <div
-            className={`
-              overflow-scroll transition-all duration-300
-              ${openIndex === index ? 'max-h-96 py-1 overflow-scroll' : 'max-h-0'}
-            `}
-          >
-            {child.props.children}
-          </div>
+          {/* Only render content if the accordion section is open */}
+          {openIndex === index && (
+            <div
+              className="overflow-scroll transition-all duration-300 h-auto py-1 overflow-auto">
+              {child.props.children}
+            </div>
+          )}
         </div>
       ))}
     </div>

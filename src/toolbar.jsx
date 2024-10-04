@@ -624,7 +624,7 @@ class Toolbar extends React.Component {
     return (
 
       <div
-        className="border-2 border-transparent shadow-md rounded-2xl w-[400px] p-2">
+        className="border-2 border-transparent shadow-md rounded-2xl w-[400px] p-2 h-full">
         <div className="mb-2 mt-2">
           <Switch isChecked={this.state.showLayout}
                   onChange={this.handleSwitchChange}/>
