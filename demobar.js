@@ -1,4 +1,5 @@
 import React from 'react';
+import { Eye } from 'lucide-react';
 import store from './src/stores/store';
 import { ReactFormGenerator } from './src/index';
 
@@ -93,14 +94,29 @@ export default class Demobar extends React.Component {
     }
 
     return (
-      <div className="clearfix" style={{ margin: '10px', width: '70%' }}>
-        <h4 className="float-left">Preview</h4>
-        <button className="btn btn-primary float-right" style={{ marginRight: '10px' }} onClick={() => this.showPreview()}>Preview Form</button>
-        <button className="btn btn-default float-right" style={{ marginRight: '10px' }} onClick={() => this.showShortPreview()}>Alternate/Short Form</button>
-        <button className="btn btn-default float-right" style={{ marginRight: '10px' }} onClick={() => this.showRoPreview()}>Read Only Form</button>
-        <button className="btn btn-default float-right" style={{ marginRight: '10px' }} onClick={() => this.saveFormData()}>Save Form</button>
+      <div className="clearfix" style={{
+        margin: '10px',
+        width: '70%',
+      }}>
+        <h4 className="float-left mt-2">Preview</h4>
+        <button
+          className="float-right items-center px-4 py-1 inline-flex text-black border border-gray-300 rounded-full focus:outline-none"
+          onClick={() => this.showPreview()}
+        >
+          <Eye className="w-4 h-4 mr-2"/>
+          Preview
+        </button>
+        <button
+          className="float-right items-center px-4 py-1 inline-flex text-white fill-black border-2 rounded-full focus:outline-none"
+          style={{
+            marginRight: '10px',
+            backgroundColor: 'black',
+            borderColor: 'black',
+          }}
+          onClick={() => this.saveFormData()}>Save Form
+        </button>
 
-        { this.state.previewVisible &&
+        {this.state.previewVisible &&
           <div className={modalClass} role="dialog">
             <div className="modal-dialog modal-lg" role="document">
               <div className="modal-content">
@@ -116,17 +132,20 @@ export default class Demobar extends React.Component {
                   // onSubmit={this._onSubmit}
                   variables={this.props.variables}
                   data={this.state.data}
-                  locale='en'/>
+                  locale="en"/>
 
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
+                <div className="modal-footer mt-2">
+                  <button type="button" className="btn btn-default"
+                          data-dismiss="modal"
+                          onClick={this.closePreview.bind(this)}>Close
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         }
 
-        { this.state.roPreviewVisible &&
+        {this.state.roPreviewVisible &&
           <div className={roModalClass}>
             <div className="modal-dialog modal-lg">
               <div className="modal-content">
@@ -142,17 +161,20 @@ export default class Demobar extends React.Component {
                   variables={this.props.variables}
                   hide_actions={true}
                   data={this.state.data}
-                  locale='en'/>
+                  locale="en"/>
 
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
+                  <button type="button" className="btn btn-default"
+                          data-dismiss="modal"
+                          onClick={this.closePreview.bind(this)}>Close
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         }
 
-        { this.state.shortPreviewVisible &&
+        {this.state.shortPreviewVisible &&
           <div className={shortModalClass}>
             <div className="modal-dialog modal-lg">
               <div className="modal-content border border-light p-3 mb-4">
@@ -166,11 +188,14 @@ export default class Demobar extends React.Component {
                   display_short={true}
                   variables={this.props.variables}
                   hide_actions={false}
-                  locale='en'
-                  />
+                  locale="en"
+                />
 
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.closePreview.bind(this)}>Close</button>
+                  <button type="button" className="btn btn-default"
+                          data-dismiss="modal"
+                          onClick={this.closePreview.bind(this)}>Close
+                  </button>
                 </div>
               </div>
             </div>
