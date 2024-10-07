@@ -367,7 +367,11 @@ class ReactForm extends React.Component {
     const { submitButton = false } = this.props;
 
     return submitButton ||
-      <input type="submit" className="btn btn-big" value={actionName}/>;
+      <input
+        type="submit"
+        className="bg-blue-500 hover:bg-blue-700 text-white rounded-2xl font-bold py-2 px-4  mr-2 cursor-pointer"
+        value={actionName}
+      />;
   };
 
   handleRenderBack = () => {
@@ -375,8 +379,12 @@ class ReactForm extends React.Component {
     const backName = name || 'Cancel';
     const { backButton = false } = this.props;
 
-    return backButton || <a href={this.props.back_action}
-                            className="btn btn-default btn-cancel btn-big">{backName}</a>;
+    return backButton || <a
+      href={this.props.back_action}
+      className="bg-gray-300 hover:bg-gray-400 hover:text-white text-gray-800 font-bold py-2 px-4 rounded-2xl  inline-block cursor-pointer"
+    >
+      {backName}
+    </a>;
   };
 
   render() {
@@ -480,7 +488,7 @@ class ReactForm extends React.Component {
               </div>
             }
             {items}
-            <div className="btn-toolbar">
+            <div className="btn-toolbar flex flex-row justify-end mb-5">
               {!this.props.hide_actions &&
                 this.handleRenderSubmit()
               }
