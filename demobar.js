@@ -1,5 +1,5 @@
 import React from 'react';
-import { Eye } from 'lucide-react';
+import { Eye, X } from 'lucide-react';
 import store from './src/stores/store';
 import { ReactFormGenerator } from './src/index';
 
@@ -116,10 +116,22 @@ export default class Demobar extends React.Component {
           onClick={() => this.saveFormData()}>Save Form
         </button>
 
-        {this.state.previewVisible &&
+        {this.state.previewVisible && (
           <div className={modalClass} role="dialog">
             <div className="modal-dialog modal-lg" role="document">
-              <div className="modal-content">
+              <div
+                className="modal-content border-none shadow-md rounded-2xl p-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xl font-semibold">Preview</h2>
+                  <button
+                    type="button"
+                    className="cursor-pointer focus:outline-none"
+                    onClick={this.closePreview.bind(this)}
+                  >
+                    <X size={18}/>
+                  </button>
+                </div>
+
                 <ReactFormGenerator
                   download_path=""
                   back_action="/"
@@ -128,23 +140,14 @@ export default class Demobar extends React.Component {
                   action_name="Save"
                   form_action="/api/form"
                   form_method="POST"
-                  // skip_validations={true}
-                  // onSubmit={this._onSubmit}
                   variables={this.props.variables}
                   data={this.state.data}
-                  locale="en"/>
-
-                <div className="modal-footer mt-2">
-                  <button type="button" className="btn btn-default"
-                          data-dismiss="modal"
-                          onClick={this.closePreview.bind(this)}>Close
-                  </button>
-                </div>
+                  locale="en"
+                />
               </div>
             </div>
           </div>
-        }
-
+        )}
         {this.state.roPreviewVisible &&
           <div className={roModalClass}>
             <div className="modal-dialog modal-lg">
