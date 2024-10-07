@@ -30,7 +30,7 @@ class ToolbarItem extends React.Component {
       connectDragSource(
         <li
           onClick={onClick}
-          className="w-full h-full p-4 rounded-2xl flex flex-col justify-center items-center gap-4 border-gray-100 border-[1px] shadow-md"
+          className="w-full h-full p-4 rounded-2xl flex flex-col justify-center items-center gap-4 border-gray-100 border-[1px] shadow-md transition-transform duration-200 hover:scale-[1.02]"
         >
           <i className={'text-4xl text-gray-400'}>{data.icon}</i>
           <div className="flex-grow flex items-center justify-center">
