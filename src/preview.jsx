@@ -312,9 +312,11 @@ export default class Preview extends React.Component {
     return (
       <div className={classes}>
         <div
-          className={`edit-form fixed top-0 left-0 h-full w-1/3 bg-white shadow-lg z-50 transform transition-transform duration-300 overflow-scroll ${
-            this.props.editElement !== null ? 'translate-x-0' : '-translate-x-full'
-          }`}
+          className={`
+          edit-form fixed top-0 left-0 h-full w-1/3 bg-white shadow-lg z-50
+          transform transition-transform duration-300 overflow-scroll
+          ${this.props.editElement !== null ? 'translate-x-0' : '-translate-x-full'}
+        `}
           ref={this.editForm}
         >
           <Suspense fallback={<div>Loading...</div>}>
@@ -322,11 +324,14 @@ export default class Preview extends React.Component {
           </Suspense>
         </div>
         <div className="Sortable">{items}</div>
-        <PlaceHolder id="form-place-holder" show={items.length === 0}
-                     index={items.length} moveCard={this.cardPlaceHolder}
-                     insertCard={this.insertCard}/>
+        <PlaceHolder
+          id="form-place-holder"
+          show={items.length === 0 && !this.props.editMode} // Hide when editMode is true
+          index={items.length}
+          moveCard={this.cardPlaceHolder}
+          insertCard={this.insertCard}
+        />
         <CustomDragLayer/>
-
       </div>
     );
   }
