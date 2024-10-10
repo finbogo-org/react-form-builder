@@ -2,7 +2,7 @@ var path = require("path");
 var webpack = require("webpack");
 
 module.exports = {
-  entry: "./src/index.jsx",
+  entry: "./app.js",
 
   output: {
     path: path.resolve("./dist"),
