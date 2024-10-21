@@ -3,8 +3,8 @@ import * as variables from "./variables.js";
 import DemoBar from "./demobar.js";
 import FormBuilder from "./src/index.jsx";
 
-const url = "/api/formdata";
-const saveUrl = "/api/formdata";
+const url = "/";
+const saveUrl = "/";
 
 const App = () => {
   const [dataForm, setDataForm] = useState([]);
