@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as variables from "./variables.js";
 import DemoBar from "./demobar.js";
 import FormBuilder from "./src/index.jsx";
+import { FormBuilderEventKeys } from "./src/utils.js";
 
 const url = "/";
 const saveUrl = "/";
@@ -14,11 +15,10 @@ const App = () => {
       "message",
       function (event) {
         // if (event.origin === "http://localhost:3000") {
-        const formData = event.data;
-
-        console.log(formData, "formDataformDataformDataformData");
-
-        setDataForm(formData);
+        if (event.data.key === FormBuilderEventKeys.PostEditForm) {
+          const formData = event.data.data;
+          setDataForm(formData);
+        }
         // }
       },
       false

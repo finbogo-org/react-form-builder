@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FormBuilderEventKeys } from "./src/utils";
-import CreateSubmission from "./createSubmission";
+import PreviewSubmission from "./previewSubmission";
 
-export default function NewEntryPoint() {
+export default function LoadSubmittedForm() {
   // const [formData, setFormData] = useState([]);
-  const [questionData, setQuestionData] = useState([]);
+  const [data, setData] = useState([]);
 
   // Effect to subscribe to ElementStore and update form data
   // useEffect(() => {
@@ -23,14 +23,14 @@ export default function NewEntryPoint() {
     window.addEventListener(
       "message",
       function (event) {
-        if (event?.data?.key === FormBuilderEventKeys.PostQuestionData) {
-          const formData = event.data?.questionData;
-          setQuestionData(formData);
+        if (event?.data?.key === FormBuilderEventKeys.LoadSubmittedForm) {
+          const formData = event.data?.data;
+          setData(formData);
         }
       },
       false
     );
-  }, [questionData]);
+  }, [data]);
 
   const handleSubmit = () => {
     // console.log("Submitting form data:", formData);
@@ -39,13 +39,13 @@ export default function NewEntryPoint() {
 
   return (
     <>
-      {!!questionData?.length && (
+      {!!data?.answerData?.length && (
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ height: "100vh", padding: "20px" }}
         >
           <div style={{ width: "80%", maxWidth: "900px" }}>
-            <CreateSubmission formData={questionData} showButtons={true} />
+            <PreviewSubmission formData={data} />
           </div>
         </div>
       )}

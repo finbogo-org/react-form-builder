@@ -2,6 +2,7 @@ import React from "react";
 import { Eye, X } from "lucide-react";
 import store from "./src/stores/store";
 import { ReactFormGenerator } from "./src/index";
+import { FormBuilderEventKeys } from "./src/utils";
 
 const answers = {};
 // const answers = {
@@ -65,11 +66,17 @@ export default class Demobar extends React.Component {
     this.setState({
       data,
     });
-    window.parent.postMessage({ formData: data }, "*");
+    window.parent.postMessage(
+      { formData: data, key: FormBuilderEventKeys.PostCreateFrom },
+      "*"
+    );
   }
 
   _onSubmit() {
-    window.parent.postMessage({ isNextClicked: true }, "*");
+    window.parent.postMessage(
+      { isNextClicked: true, key: FormBuilderEventKeys.PostCreateFrom },
+      "*"
+    );
   }
 
   saveFormData() {
@@ -138,14 +145,16 @@ export default class Demobar extends React.Component {
                 <ReactFormGenerator
                   download_path=""
                   back_action="/"
-                  back_name="Back"
+                  back_name=""
                   answer_data={answers}
-                  action_name="Save"
+                  action_name=""
                   // form_action="/api/form"
                   // form_method="POST"
                   variables={this.props.variables}
                   data={this.state.data}
                   locale="en"
+                  hide_actions={true}
+                  read_only={true}
                 />
               </div>
             </div>
