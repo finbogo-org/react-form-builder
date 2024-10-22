@@ -20,7 +20,6 @@ export default function LoadFormSubmission() {
 
   return (
     <>
-      efjksbwfhfrehwfsjfnhjbhb
       {!!questionData?.length && (
         <div
           className="d-flex justify-content-center align-items-center"
