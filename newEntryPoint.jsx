@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Preview from "./preview";
+import { FormBuilderEventKeys } from "./src/utils";
+import CreateSubmission from "./createSubmission";
 
 export default function NewEntryPoint() {
   // const [formData, setFormData] = useState([]);
@@ -22,12 +23,10 @@ export default function NewEntryPoint() {
     window.addEventListener(
       "message",
       function (event) {
-        console.log(event);
-        // if (event.origin === "http://localhost:3000") {
-        const formData = event.data?.questionData;
-
-        setQuestionData(formData);
-        // }
+        if (event?.data?.key === FormBuilderEventKeys.PostQuestionData) {
+          const formData = event.data?.questionData;
+          setQuestionData(formData);
+        }
       },
       false
     );
@@ -46,7 +45,7 @@ export default function NewEntryPoint() {
           style={{ height: "100vh", padding: "20px" }}
         >
           <div style={{ width: "80%", maxWidth: "900px" }}>
-            <Preview formData={questionData} showButtons={true} />
+            <CreateSubmission formData={questionData} showButtons={true} />
           </div>
         </div>
       )}

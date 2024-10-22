@@ -5,14 +5,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import App from "./home.js";
 import * as serviceWorker from "./serviceWorker.js";
 
-import Preview from "./preview";
-import NewEntryPoint from "./customer.jsx";
+import NewEntryPoint from "./newEntryPoint.jsx";
 
 ReactDOM.render(
   <Router>
     <Routes>
       {/* Define the /preview route */}
-      <Route path="/preview" element={<NewEntryPoint />} />
+      <Route path="/create-submission" element={<NewEntryPoint />} />
 
       {/* Define the home route */}
       <Route path="/" element={<App />} />

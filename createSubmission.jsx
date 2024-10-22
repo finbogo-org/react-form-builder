@@ -1,13 +1,19 @@
 import React from "react";
 import "./preview.css"; // Import the CSS file
 import FormBuilder from "./src/index.jsx";
+import { FormBuilderEventKeys } from "./src/utils.js";
 
-const Preview = ({ formData, showButtons = true, buttonLabel = "Submit" }) => {
-  console.log(formData, "formDataPreviewPreviewPreviewPreviewPreview");
+const CreateSubmission = ({
+  formData,
+  showButtons = true,
+  buttonLabel = "Submit",
+}) => {
   const handleSubmit = (data) => {
-    console.log(data, "sdcsygvtftywemebgyy");
     // Existing form submit logic (customer handler)
-    window.parent.postMessage({ answerData: data }, "*");
+    window.parent.postMessage(
+      { answerData: data, key: FormBuilderEventKeys.PostAnswerData },
+      "*"
+    );
   };
 
   return (
@@ -25,4 +31,4 @@ const Preview = ({ formData, showButtons = true, buttonLabel = "Submit" }) => {
   );
 };
 
-export default Preview;
+export default CreateSubmission;
