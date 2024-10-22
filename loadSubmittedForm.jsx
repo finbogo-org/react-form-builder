@@ -16,7 +16,7 @@ export default function LoadSubmittedForm() {
       },
       false
     );
-  }, [data]);
+  }, []);
 
   return (
     <>

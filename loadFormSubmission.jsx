@@ -16,7 +16,7 @@ export default function LoadFormSubmission() {
       },
       false
     );
-  }, [questionData]);
+  }, []);
 
   return (
     <>
