@@ -3,21 +3,7 @@ import { FormBuilderEventKeys } from "./src/utils";
 import CreateSubmission from "./createSubmission";
 
 export default function LoadFormSubmission() {
-  // const [formData, setFormData] = useState([]);
   const [questionData, setQuestionData] = useState([]);
-
-  // Effect to subscribe to ElementStore and update form data
-  // useEffect(() => {
-  //   const onStoreUpdate = (state) => setFormData(state.data);
-
-  //   // Subscribe to store
-  //   ElementStore.subscribe(onStoreUpdate);
-
-  //   // Cleanup function to remove listener when component unmounts
-  //   return () => {
-  //     ElementStore.removeListener(onStoreUpdate); // Correctly remove listener
-  //   };
-  // }, []);
 
   useEffect(() => {
     window.addEventListener(
@@ -31,11 +17,6 @@ export default function LoadFormSubmission() {
       false
     );
   }, [questionData]);
-
-  const handleSubmit = () => {
-    // console.log("Submitting form data:", formData);
-    // Add any form submission logic here
-  };
 
   return (
     <>
