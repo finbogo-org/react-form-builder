@@ -1,7 +1,7 @@
 import React from "react";
-import "./preview.css"; // Import the CSS file
-import FormBuilder from "./src/index.jsx";
-import { FormBuilderEventKeys } from "./src/utils.js";
+import "../../../preview.css"; // Import the CSS file
+import FormBuilder from "../../index.jsx";
+import { FormBuilderEventKeys } from "../../utils.js";
 
 const CreateSubmission = ({
   formData,
@@ -9,7 +9,6 @@ const CreateSubmission = ({
   buttonLabel = "Submit",
 }) => {
   const handleSubmit = (data) => {
-    // Existing form submit logic (customer handler)
     window.parent.postMessage(
       { answerData: data, key: FormBuilderEventKeys.PostAnswerData },
       "*"

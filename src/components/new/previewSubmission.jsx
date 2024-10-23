@@ -1,6 +1,6 @@
 import React from "react";
-import "./preview.css"; // Import the CSS file
-import FormBuilder from "./src/index.jsx";
+import "../../../preview.css"; // Import the CSS file
+import FormBuilder from "../../index.jsx";
 
 const PreviewSubmission = ({ formData }) => {
   return (
