@@ -17,6 +17,7 @@ ReactDOM.render(
 
       {/* Define the home route */}
       <Route path="/" element={<App />} />
+      <Route path="/test" element={<App />} />
       <Route path="/form" element={<LoadFormSubmission />} />
     </Routes>
   </Router>,
