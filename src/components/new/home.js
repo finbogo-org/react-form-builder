@@ -12,25 +12,25 @@ const Home = () => {
       "message",
       function (event) {
         switch (event.data.key) {
-          case FormBuilderEventKeys.PostQuestionData:
+          case FormBuilderEventKeys.CreateSubmission:
             const questionData = event.data?.questionData;
             setPageData({
               questionData,
-              key: FormBuilderEventKeys.PostQuestionData,
+              key: FormBuilderEventKeys.CreateSubmission,
             });
             return;
-          case FormBuilderEventKeys.PostEditForm:
+          case FormBuilderEventKeys.LoadEditForm:
             const data = event.data.data;
             setPageData({
               data,
-              key: FormBuilderEventKeys.PostEditForm,
+              key: FormBuilderEventKeys.LoadEditForm,
             });
             return;
-          case FormBuilderEventKeys.LoadSubmittedForm:
+          case FormBuilderEventKeys.PreviewSubmission:
             const submittedFormData = event.data?.data;
             setPageData({
               submittedFormData,
-              key: FormBuilderEventKeys.LoadSubmittedForm,
+              key: FormBuilderEventKeys.PreviewSubmission,
             });
             return;
           default:
@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <>
-      {pageData?.key === FormBuilderEventKeys.LoadSubmittedForm &&
+      {pageData?.key === FormBuilderEventKeys.PreviewSubmission &&
         !!pageData?.submittedFormData?.answerData?.length && (
           <div
             className="d-flex justify-content-center align-items-center"
@@ -54,7 +54,7 @@ const Home = () => {
             </div>
           </div>
         )}
-      {pageData?.key === FormBuilderEventKeys.PostQuestionData &&
+      {pageData?.key === FormBuilderEventKeys.CreateSubmission &&
         !!pageData?.questionData?.length && (
           <div
             className="d-flex justify-content-center align-items-center"
@@ -69,7 +69,7 @@ const Home = () => {
           </div>
         )}
       {(!pageData?.key ||
-        pageData?.key === FormBuilderEventKeys.PostEditForm) && (
+        pageData?.key === FormBuilderEventKeys.LoadEditForm) && (
         <CreateOrEditForm data={pageData?.data} />
       )}
     </>

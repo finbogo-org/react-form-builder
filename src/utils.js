@@ -1,7 +1,7 @@
 export const FormBuilderEventKeys = {
-  PostQuestionData: "post_question_data",
+  CreateSubmission: "create_submission",
   PostAnswerData: "post_answer_data",
-  LoadSubmittedForm: "load_submitted_form",
+  PreviewSubmission: "preview_submission",
   PostCreateFrom: "post_create_form",
-  PostEditForm: "post_edit_form",
+  LoadEditForm: "load_edit_form",
 };
