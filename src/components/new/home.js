@@ -44,7 +44,7 @@ const Home = () => {
   return (
     <>
       {pageData?.key === FormBuilderEventKeys.PreviewSubmission &&
-        !!pageData?.submittedFormData?.answerData?.length && (
+        !!pageData?.submittedFormData?.answerData && (
           <div
             className="d-flex justify-content-center align-items-center"
             style={{ height: "100vh", padding: "20px" }}
