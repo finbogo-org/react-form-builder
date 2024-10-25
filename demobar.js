@@ -103,8 +103,8 @@ export default class Demobar extends React.Component {
       <div
         className="clearfix"
         style={{
-          margin: "10px",
-          width: "70%",
+          marginTop: "20px",
+          width: "100%",
         }}
       >
         <h4 className="float-left mt-2">Preview</h4>

@@ -313,7 +313,7 @@ export default class Preview extends React.Component {
       <div className={classes}>
         <div
           className={`
-          edit-form fixed top-0 left-0 h-full w-1/3 bg-white shadow-lg z-50
+          edit-form fixed top-0 left-0 h-screen w-1/3 bg-white shadow-lg z-50
           transform transition-transform duration-300 overflow-scroll
           ${this.props.editElement !== null ? 'translate-x-0' : '-translate-x-full'}
         `}
@@ -342,6 +342,6 @@ Preview.defaultProps = {
   files: [],
   editMode: false,
   editElement: null,
-  className: 'rounded-t-xl bg-[#F6F6F6] p-4 shadow-sm min-h-[30rem] w-full h-full',
+  className: 'rounded-t-xl bg-[#F6F6F6] p-4 shadow-sm w-full h-screen ',
   renderEditForm: props => <FormElementsEdit {...props} />,
 };

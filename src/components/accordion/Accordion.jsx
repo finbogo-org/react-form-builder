@@ -22,7 +22,7 @@ const Accordion = ({
         <div key={index} className="">
           <button
             onClick={() => handleClick(index)}
-            className="w-full flex justify-between items-center py-3 px-4 text-left font-semibold focus:outline-none"
+            className="w-full flex justify-between items-center py-3 px-4 text-left font-semibold focus:outline-none hover:bg-gray-50 hover:rounded-2xl"
           >
             {child.props.title}
             <ChevronDown

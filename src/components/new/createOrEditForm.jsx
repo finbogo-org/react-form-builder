@@ -9,12 +9,12 @@ const saveUrl = "/";
 const CreateOrEditForm = ({ data }) => {
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      style={{ display: "flex", flexDirection: "column", alignItems: "end" }}
     >
-      <div style={{ alignItems: "end", width: "70%" }}>
+      <div style={{ alignItems: "end", width: "100%" }}>
         <DemoBar variables={variables} />
       </div>
-      <div style={{ width: "70%", marginTop: "30px" }}>
+      <div style={{ width: "100%", marginTop: "30px" }}>
         {!data?.length && (
           <FormBuilder.ReactFormBuilder
             variables={variables}
