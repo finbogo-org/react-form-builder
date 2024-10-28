@@ -104,19 +104,20 @@ export default class Demobar extends React.Component {
         className="clearfix"
         style={{
           marginTop: "20px",
-          width: "100%",
+          marginRight: "20px",
+          width: "100vw",
         }}
       >
         <h4 className="float-left mt-2">Preview</h4>
         <button
-          className="float-right items-center px-4 py-1 inline-flex text-black border border-gray-300 rounded-full focus:outline-none"
+          className="float-right items-center px-4 py-1 inline-flex text-black border border-gray-300 hover:bg-gray-50 rounded-full focus:outline-none"
           onClick={() => this.showPreview()}
         >
           <Eye className="w-4 h-4 mr-2" />
           Preview
         </button>
         <button
-          className="float-right items-center px-4 py-1 inline-flex text-white fill-black border-2 rounded-full focus:outline-none"
+          className="float-right items-center px-4 py-1 inline-flex text-white fill-black border-2 rounded-full hover:fill-black focus:outline-none"
           style={{
             marginRight: "10px",
             backgroundColor: "black",

@@ -75,7 +75,7 @@ class ReactFormBuilder extends React.Component {
            <Container />
          </div> */}
             <div className="react-form-builder">
-              <div className="flex gap-x-10">
+              <div className="flex gap-x-5 " style={{ width: '100vw' }}>
                 <Preview
                   files={this.props.files}
                   manualEditModeOff={this.manualEditModeOff.bind(this)}
