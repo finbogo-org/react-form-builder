@@ -45,17 +45,20 @@ const Home = () => {
     <>
       {pageData?.key === FormBuilderEventKeys.PreviewSubmission &&
         !!pageData?.submittedFormData?.answerData && (
-          <div className="flex justify-center items-center h-screen p-5">
-            <div className="w-full max-w-[900px]">
+          <div
+            className="flex justify-center items-center h-screen p-5 bg-white">
+            <div
+              className="w-full max-w-[600px] p-6 bg-gray-50 rounded-lg shadow-md">
               <PreviewSubmission formData={pageData?.submittedFormData}/>
             </div>
           </div>
+
         )}
       {pageData?.key === FormBuilderEventKeys.CreateSubmission &&
         !!pageData?.questionData?.length && (
           <div
             className="d-flex justify-content-center align-items-center"
-            style={{ height: "100vh", padding: "20px" }}
+            style={{height: "100vh", padding: "20px" }}
           >
             <div style={{ width: "80%", maxWidth: "900px" }}>
               <CreateSubmission
