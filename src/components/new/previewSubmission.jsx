@@ -4,7 +4,7 @@ import FormBuilder from "../../index.jsx";
 
 const PreviewSubmission = ({ formData }) => {
   return (
-    <div className="w-auto mx-auto p-0 rounded-lg shadow-md bg-gray-100">
+    <div className="container">
       <h1 className="text-center text-2xl mb-5 font-bold text-gray-800">Preview
         Submitted</h1>
       <FormBuilder.ReactFormGenerator
