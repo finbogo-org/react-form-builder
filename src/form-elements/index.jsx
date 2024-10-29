@@ -158,8 +158,10 @@ class TextInput extends React.Component {
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
         <div className="form-group">
-          <ComponentLabel {...this.props} />
-          <input {...props} className="w-full rounded-xl bg-white p-1"/>
+          <div className="w-full">
+            <ComponentLabel {...this.props} className="break-words w-full" />
+          </div>
+          <input {...props} className="w-full rounded-xl bg-white p-1" />
         </div>
       </div>
     );
