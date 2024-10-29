@@ -636,7 +636,7 @@ class Toolbar extends React.Component {
             placeholder="Search..."
             value={searchQuery}
             onChange={(e) => this.setState({ searchQuery: e.target.value })}
-            className="pl-10 pr-10 py-1 rounded-full bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+            className="pl-10 pr-10 py-1 rounded-full bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black w-full"
           />
           <div
             className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

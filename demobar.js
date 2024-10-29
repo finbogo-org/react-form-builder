@@ -105,7 +105,7 @@ export default class Demobar extends React.Component {
         style={{
           marginTop: "20px",
           marginRight: "20px",
-          width: "100vw",
+          width: "99vw",
         }}
       >
         <h4 className="float-left mt-2">Preview</h4>
@@ -136,7 +136,7 @@ export default class Demobar extends React.Component {
                   <h2 className="text-xl font-semibold">Preview</h2>
                   <button
                     type="button"
-                    className="cursor-pointer focus:outline-none"
+                    className="cursor-pointer focus:outline-none hover:bg-gray-50 hover:rounded-2xl"
                     onClick={this.closePreview.bind(this)}
                   >
                     <X size={18} />
