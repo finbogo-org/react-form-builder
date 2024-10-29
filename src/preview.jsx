@@ -313,9 +313,9 @@ export default class Preview extends React.Component {
       <div className={classes}>
         <div
           className={`
-          edit-form fixed top-0 left-0 h-screen w-1/3 bg-white shadow-lg z-50
+          edit-form fixed top-0 left-0 h-screen w-1/3 bg-white z-50
           transform transition-transform duration-300 overflow-scroll
-          ${this.props.editElement !== null ? 'translate-x-0' : '-translate-x-full'}
+          ${this.props.editElement !== null ? 'translate-x-0 shadow-lg' : '-translate-x-full'}
         `}
           ref={this.editForm}
         >
