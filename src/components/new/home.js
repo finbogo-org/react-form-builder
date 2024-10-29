@@ -46,9 +46,9 @@ const Home = () => {
       {pageData?.key === FormBuilderEventKeys.PreviewSubmission &&
         !!pageData?.submittedFormData?.answerData && (
           <div
-            className="bg-white h-screen">
+            className="bg-white">
             <div
-              className="w-full max-w-[600px] p-6 bg-gray-50 rounded-lg shadow-md">
+              className="w-full max-w-[600px] p-6 h-screen rounded-lg shadow-md">
               <PreviewSubmission formData={pageData?.submittedFormData}/>
             </div>
           </div>
@@ -58,7 +58,7 @@ const Home = () => {
         !!pageData?.questionData?.length && (
           <div
             className="d-flex justify-content-center align-items-center"
-            style={{height: "100vh"}}
+            style={{height: "100vh", padding: "20px" }}
           >
             <CreateSubmission
                 formData={pageData?.questionData}
