@@ -49,7 +49,7 @@ const Home = () => {
             className="d-flex justify-content-center align-items-center"
             style={{ height: "100vh", padding: "20px" }}
           >
-            <div style={{ width: "80%", maxWidth: "900px" }}>
+            <div style={{ width: "100vw", maxWidth: "900px" }}>
               <PreviewSubmission formData={pageData?.submittedFormData} />
             </div>
           </div>
