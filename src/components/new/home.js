@@ -48,7 +48,7 @@ const Home = () => {
           <div
             className="bg-white">
             <div
-              className="w-full max-w-[600px] p-6 h-screen rounded-lg shadow-md">
+              className="w-full max-w-[600px] p-6 bg-gray-50 h-screen rounded-lg shadow-md">
               <PreviewSubmission formData={pageData?.submittedFormData}/>
             </div>
           </div>
