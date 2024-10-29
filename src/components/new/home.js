@@ -60,12 +60,11 @@ const Home = () => {
             className="d-flex justify-content-center align-items-center"
             style={{height: "100vh", padding: "20px" }}
           >
-            <div style={{ width: "80%", maxWidth: "900px" }}>
-              <CreateSubmission
+            <CreateSubmission
                 formData={pageData?.questionData}
                 showButtons={true}
-              />
-            </div>
+            />
+
           </div>
         )}
       {(!pageData?.key ||
